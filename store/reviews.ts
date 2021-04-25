@@ -29,6 +29,7 @@ export const mutations = {
   SET_REVIEWS (state: { reviews: Review[] }, reviews: Review[]) {
     if(!reviews.length){
       state.reviews = []
+      return
     }
     state.reviews = reviews
   },

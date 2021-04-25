@@ -1,0 +1,26 @@
+.products-list
+  @apply grid justify-center  items-center gap-4 my-6
+  grid-auto-rows: 1fr
+  grid-template-columns: repeat(auto-fit,minmax(250px,320px))
+  a
+    @apply p-4 block
+  &__item
+    @apply  shadow rounded
+    transition: all 500ms ease-in-out
+    &:hover
+      @apply shadow-xl
+  &__img
+    @apply flex justify-center mb-6
+    img
+      height: 250px
+      object-fit: cover
+      object-position: center
+  &__title
+    @apply font-bold text-center text-xl
+    overflow: hidden
+    text-overflow: ellipsis
+  &__rating
+    @apply mt-2 justify-center
+@screen md
+  .products-list
+    @apply justify-start

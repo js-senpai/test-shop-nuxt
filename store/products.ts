@@ -4,6 +4,7 @@ interface Product {
   img: string
   text: string
   title: string
+  reviewsCount: number
 }
 
 export const state = () => ({
@@ -12,7 +13,8 @@ export const state = () => ({
     id: 0,
     img: '',
     text: '',
-    title: 'Product'
+    title: 'Product',
+    reviewsCount: 0
   }
 })
 
@@ -31,6 +33,37 @@ export const mutations = {
     if(findByID === -1) return;
     state.product = state.products[findByID]
   },
+}
+
+export const actions = {
+  // Get products
+  // @ts-ignore
+  async getProducts({commit}){
+    // @ts-ignore
+    const getProducts: Product[] = await this.$axios.$get('/api/products/')
+    if(getProducts.length){
+      for(let product of getProducts){
+        if(product.img){
+          // @ts-ignore
+          product.img = `${this.$config.API_URL}/static/${product.img}`
+        }
+        if(product.id){
+          // @ts-ignore
+          // Get review by product id
+          const getReviews = await this.$axios.$get(`/api/reviews/${product.id}`)
+          if(getReviews.length){
+            const getCount = getReviews.map(({rate}:{rate: number}):number => {
+              return isNaN(rate) || rate > 5 || rate < 0 ? 0: rate
+            }).reduce((current:number,next:number):number => {
+              return current + next
+            })
+            product.reviewsCount = isNaN(getCount) ? 0: Math.floor(getCount / 5)
+          }
+        }
+      }
+      commit('SET_PRODUCTS',getProducts)
+    }
+  }
 }
 
 export const getters = {

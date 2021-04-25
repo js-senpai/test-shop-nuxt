@@ -13,11 +13,17 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet',href:'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' }
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '@/assets/sass/main.sass',
+    '@/assets/css/tailwind.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -36,8 +42,27 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['nuxt-vuex-localstorage'],
+  modules: [
+    'nuxt-vuex-localstorage',
+    '@nuxtjs/axios',
+    ['nuxt-lazy-load',{
+      defaultImage: '/img/icons/loader.svg',
+    }]
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL,
+  },
+  // Axios
+  axios: {
+    baseURL: process.env.API_URL
+  },
+  compilerOptions: {
+    types: [
+      "@nuxt/types",
+      "@nuxtjs/axios"
+    ]
+  }
 }
