@@ -8,20 +8,11 @@ interface Review {
   },
   rate: number,
   text: string
+  created_at: string
 }
 
 export const state = () => ({
   reviews: [],
-  review: {
-    id: 0,
-    product: 0,
-    created_by: {
-      id: 0,
-      username: ''
-    },
-    rate: 0,
-    text: ''
-  }
 })
 
 export const mutations = {
@@ -33,17 +24,46 @@ export const mutations = {
     }
     state.reviews = reviews
   },
-  SET_REVIEW (state: { id: number, reviews: Review[], review: Review }, id: number) {
-    if(!state.reviews.length || isNaN(id)) return
-    // Get review by ID
-    const findByID:number = state.reviews.findIndex(item => item.id === id)
-    if(findByID === -1) return;
-    state.review = state.reviews[findByID]
+  ADD_REVIEW (state: { reviews: Review[] }, review: Review) {
+    state.reviews.push(review)
   },
 }
 
+export const actions = {
+  // Get reviews
+  async getReviews({ commit }: { commit: any },id:number){
+    if(isNaN(id)) return
+    try {
+      // @ts-ignore
+      const getReviews = await this.$axios.$get(`/api/reviews/${id}`)
+      if(getReviews.length){
+        commit('SET_REVIEWS',getReviews)
+      }
+    } catch (e) {
+      console.error(`${new Date()} Error in get reviews. Error: `,e)
+    }
+  },
+  async addReview({commit}: { commit: any },{productID, review }:{ productID: number, review: Review } ) {
+    if(!review || isNaN(productID)) return
+    try {
+      // @ts-ignore
+      const { id } = await this.$axios.post(`/api/reviews/${productID}`,{
+        ...review
+      },{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if(typeof id !== 'undefined' && !isNaN(id)){
+        review.id = id
+        commit('ADD_REVIEW',review)
+      }
+    } catch (e) {
+      console.error(`${new Date()} Error in update review. Error: `,e)
+    }
+  }
+}
 export const getters = {
   getReviews: (state: { reviews: Review[] }) => state.reviews,
-  getReview: (state: { review: Review }) => state.review
 }
 

@@ -13,7 +13,7 @@ export const state = () => ({
     username: '',
   },
   token: '',
-  isAuth: false
+  isAuth: false,
 })
 
 export const mutations = {
@@ -26,7 +26,7 @@ export const mutations = {
       return
     }
     state.user =  user
-    state.isAuth = false
+    state.isAuth = true
     // @ts-ignore
     state.token = token
   },
@@ -35,7 +35,7 @@ export const mutations = {
     state.isAuth = false
     state.user.username = ''
     state.token = ''
-  }
+  },
 }
 
 export const getters = {

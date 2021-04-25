@@ -9,12 +9,15 @@
              <img :data-src="product.img" :alt="product.title" :title="product.title" v-lazy-load>
            </div>
            <div v-show="product.title" class="products-list__title">{{ product.title }}</div>
-           <ul class="rating-list products-list__rating">
-             <li v-for="(rating,index) in 5" :key="index" class="rating-list__item products-list__rating-item">
-               <i v-if="rating <= product.reviewsCount" class="fas fa-star rating-list__star rating-list__star-active"></i>
-               <i v-else class="far fa-star rating-list__star rating-list__star-deactive"></i>
-             </li>
-           </ul>
+           <div class="rating products-list__rating">
+             <ul class="rating-list">
+               <li v-for="(rating,index) in 5" :key="index" class="rating-list__item products-list__rating-item">
+                 <i v-if="rating <= product.reviewsRate" class="fas fa-star rating-list__star rating-list__star-active"></i>
+                 <i v-else class="far fa-star rating-list__star rating-list__star-deactive"></i>
+               </li>
+             </ul>
+             <div v-show="product.reviewsCount" class="rating-count">{{ product.reviewsCount }} отзывов</div>
+           </div>
          </nuxt-link>
     </li>
   </ul>

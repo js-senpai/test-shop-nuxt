@@ -1,0 +1,18 @@
+.auth-block
+  @apply relative
+  &__logout
+    @apply p-2 rounded bg-white shadow-sm
+    position: absolute
+    right: -5px
+    bottom: -50px
+    &-container
+      @apply relative
+      &::before
+        content: ""
+        border: 5px solid transparent
+        border-bottom: 5px solid #fff
+        position: absolute
+        top: -18px
+        right: 0
+    &-btn
+      color: #000

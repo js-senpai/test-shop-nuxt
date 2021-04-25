@@ -1,0 +1,31 @@
+.product
+  &__content
+    @apply grid  justify-between gap-5 my-4
+    grid-template-columns: 100%
+  &__img
+    img
+      width: 100%
+      object-fit: cover
+      object-position: center
+      max-height: 450px
+  &__reviews
+    @apply my-4
+    &-textarea
+      @apply mb-4
+    &-list
+      &__item
+        @apply rounded-md border-2 p-4 w-full border-gray-300
+        &:not(:last-child)
+          @apply mb-2
+      &__header
+        @apply grid justify-between mb-4 gap-2
+        grid-template-columns: 1fr 1fr
+        &-date
+          text-align: right
+          display: block
+      &__text
+        overflow-wrap: break-word
+@screen lg
+  .product
+    &__content
+      grid-template-columns: 1.5fr 2fr

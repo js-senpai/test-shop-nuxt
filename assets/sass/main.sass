@@ -1,8 +1,50 @@
-.rating-list
+.rating
   @apply flex items-center
-  &__item
-    @apply mr-1
-  &__star
-    @apply text-gray-300
-    &-active
-      @apply text-yellow-300
+  &-list
+    @apply flex items-center mr-2
+    &__item
+      @apply mr-1
+      cursor: pointer
+    &__star
+      @apply text-gray-300
+      &-active
+        @apply text-yellow-300
+// Form inputs
+label
+  @apply text-sm mb-1
+  display: block
+input[type="text"],input[type="number"],input[type="password"],textarea
+  @apply px-2 py-1 block rounded-md border-gray-300 border-2 w-full
+  outline: none
+  transition: all 500ms ease-in-out
+  &:hover,&:focus
+    @apply border-gray-400
+  &.error
+    @apply border-red-400
+button
+  outline: none
+  border: none
+  &:hover,&:focus
+    outline: none
+    border: none
+// Buttons
+.btn
+  @apply flex justify-center items-center w-full p-2 rounded-md text-white bg-gray-400
+  outline: none
+  border: none
+  &:hover,&:focus
+    @apply bg-gray-300
+    outline: none
+    border: none
+  &__submit
+      @apply mb-2 mt-4 bg-green-500
+      &:hover,&:focus
+        @apply bg-green-400
+      &:disabled
+        @apply bg-green-300
+        cursor: not-allowed
+//Titles
+h1
+  @apply text-3xl font-bold mb-6
+h2
+  @apply text-2xl font-bold mb-4
