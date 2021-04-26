@@ -1,6 +1,6 @@
 <template>
   <div v-if="show"  class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" >
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="flex items-center justify-center min-h-screen  text-center sm:block sm:p-0">
       <transition
        enter-class="ease-out duration-300"
        enter-active-class="opacity-0"
@@ -31,7 +31,7 @@
                 <h3 class="mr-1 text-lg leading-6 font-medium text-gray-900" id="modal-title">
                   {{ title || (loginIn ? 'Авторизироваться':'Зарегистрироваться') }}
                 </h3>
-                <button class="auth-popup__close" @click="togglePopup"><i class="fas fa-times"></i></button>
+                <button class="auth-popup__close text-gray-600" @click="togglePopup"><i class="fas fa-times"></i></button>
               </div>
               <div class="mt-2">
                 <div class="auth-popup__form">
